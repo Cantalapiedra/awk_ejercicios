@@ -52,14 +52,16 @@ ref_mOTU_v25_00001      Leptospira alexanderi   100053  0.0000000000
 
 ¿Cómo hacemos esto mismo con awk?
 
-solución 1.2: `awk '/^#/ {next} {print $0; exit}' data/motus_profile`
+**solución 1.2:** `awk '/^#/ {next} {print $0; exit}' data/motus_profile`
 
 salida esperada:
 la misma que para el grep
 
 ----
 
-1.3. Veamos a continuación algunos valores de la columna "consensus_taxonomy", que es la segunda columna. Por ejemplo, vamos a mostrar los primeros 10 valores de dicha columna.
+## Ejercicio 1.3
+
+Veamos a continuación algunos valores de la columna *consensus_taxonomy*, que es la segunda columna. Por ejemplo, vamos a mostrar los primeros 10 valores de dicha columna.
 
 ```
 grep -v "^#" data/motus_profile | head -10 | cut -f 2
@@ -81,18 +83,20 @@ Chryseobacterium indologenes
 
 ¿Cómo hacemos esto mismo con awk?
 
-solución 1.3: `awk -F '\t' '/^#/ {next;} i < 10 {print $2; i++;} i >= 10 {exit}' data/motus_profile`
+**solución 1.3:** `awk -F '\t' '/^#/ {next;} i < 10 {print $2; i++;} i >= 10 {exit}' data/motus_profile`
 
 salida esperada:
 la misma que con el comando que usa grep
 
 ----
 
-1.4. Ahora vamos ya al meollo de la cuestión. En el fichero tenemos los datos para todos los mOTUs. Queremos ver cuántos tenemos en nuestra muestra, es decir, cuántos hay con abundancia relativa > 0. Esto ya no es tan fácil de hacer sin utilizar awk. En concreto, vamos a mostrar el total de mOTUs, cuántos no han sido detectados y cuántos sí han sido detectados en la muestra.
+## Ejercicio 1.4
+
+Ahora vamos ya al meollo de la cuestión. En el fichero tenemos los datos para todos los mOTUs. Queremos ver cuántos tenemos en nuestra muestra, es decir, cuántos hay con abundancia relativa > 0. Esto ya no es tan fácil de hacer sin utilizar awk. En concreto, vamos a mostrar el total de mOTUs, cuántos no han sido detectados y cuántos sí han sido detectados en la muestra.
 
 ¿Cómo lo hacemos con awk?
 
-solución 1.4: `awk -F '\t' '/^#/ {next} $4 == 0.0 {i++} $4 > 0.0 {j++} END {print i+j,i,j}' data/motus_profile`
+**solución 1.4:** `awk -F '\t' '/^#/ {next} $4 == 0.0 {i++} $4 > 0.0 {j++} END {print i+j,i,j}' data/motus_profile`
 
 salida esperada:
 ```
@@ -102,33 +106,38 @@ salida esperada:
 
 ----
 
-1.5. ¿Cómo podemos hacer para en lugar de la salida de 1.4 obtener la salida en el siguiente formato?
+## Ejercicio 1.5
+
+¿Cómo podemos hacer para en lugar de la salida de 1.4 obtener la salida en el siguiente formato?
 
 ```
 14213,13521,692
 ```
 
-solución 1.5: `awk -F '\t' 'BEGIN{OFS=","} /^#/ {next} $4 == 0.0 {i++} $4 > 0.0 {j++} END {print i+j,i,j}' data/motus_profile`
+**solución 1.5:** `awk -F '\t' 'BEGIN{OFS=","} /^#/ {next} $4 == 0.0 {i++} $4 > 0.0 {j++} END {print i+j,i,j}' data/motus_profile`
 
 ----
 
-1.6. ¿Y en el siguiente formato?
+## Ejercicio 1.6
+
+¿Y en el siguiente formato?
 
 ```
 14213 = 13521 + 692
 ```
 
-solución 1.6: `awk -F '\t' '/^#/ {next} $4 == 0.0 {i++} $4 > 0.0 {j++} END {printf "%s = %s + %s\n",i+j,i,j}' data/motus_profile`
+**solución 1.6:** `awk -F '\t' '/^#/ {next} $4 == 0.0 {i++} $4 > 0.0 {j++} END {printf "%s = %s + %s\n",i+j,i,j}' data/motus_profile`
 
 ----
 
-1.7. Así que tenemos 692 mOTUs detectados en la muestra. Imprime solamente esos 692 a un nuevo fichero, pero solamente con los siguientes campos, separados por "|":
+## Ejercicio 1.7
+
+Así que tenemos 692 mOTUs detectados en la muestra. Imprime solamente esos 692 a un nuevo fichero llamado *motus_detected_genera*, pero solamente con los siguientes campos, separados por "|":
 
 - Género
-- Especie
 - Abundancia relativa
 
-solución 1.7: `awk -F '\t' 'BEGIN{OFS="|"} /^#/ {next} $4 > 0.0 {sub(" .*", "", $2); print $2,$4 > "motus_detected_genera"}' data/motus_profile`
+**solución 1.7:** `awk -F '\t' 'BEGIN{OFS="|"} /^#/ {next} $4 > 0.0 {sub(" .*", "", $2); print $2,$4 > "motus_detected_genera"}' data/motus_profile`
 
 salida esperada (contenido de "motus_detected_genera"):
 ```
@@ -147,9 +156,11 @@ Streptococcus|0.0000041700
 
 ----
 
-1.8. Procesa el fichero obtenido en 1.7, para mostrar una sola línea por género, incluyendo como columnas el nombre del género y la suma de los valores de abundancia para ese género, dichos campos separados por tabulador.
+## Ejercicio 1.8
 
-solución 1.8: `awk -F '|' 'BEGIN{OFS="\t"}{v[$1]+=$2} END {for (a in v) print a,v[a]}' motus_detected_genera`
+Procesa el fichero obtenido en 1.7, para mostrar una sola línea por género, incluyendo como columnas el nombre del género y la suma de los valores de abundancia para ese género, dichos campos separados por tabulador.
+
+**solución 1.8:** `awk -F '|' 'BEGIN{OFS="\t"}{v[$1]+=$2} END {for (a in v) print a,v[a]}' motus_detected_genera`
 
 salida esperada:
 ```
@@ -168,11 +179,12 @@ Bacteroidaceae  7.34845e-05
 
 ----
 
-1.9. Haz lo mismo que en 1.8, pero mostrando los géneros ordenados alfabéticamente.
+## Ejercicio 1.9
+
+Haz lo mismo que en 1.8, pero mostrando los géneros ordenados alfabéticamente.
 tip: usa la función "asorti" https://www.gnu.org/software/gawk/manual/html_node/Array-Sorting-Functions.html
 
-
-solución 1.9: `awk -F '|' 'BEGIN{OFS="\t"}{v[$1]+=$2} END {n = asorti(v, w); for (i = 1; i <= n; i++) print w[i],v[w[i]]}' motus_detected_genera`
+**solución 1.9:** `awk -F '|' 'BEGIN{OFS="\t"}{v[$1]+=$2} END {n = asorti(v, w); for (i = 1; i <= n; i++) print w[i],v[w[i]]}' motus_detected_genera`
 
 salida esperada:
 ```
@@ -191,9 +203,11 @@ Agrobacterium   8.397e-07
 
 ----
 
-1.10. Haz lo mismo que en 1.9, pero ordenando por abundancia de mayor a menor, para mostrar solamente los 10 géneros más abundantes en la muestra.
+## Ejercicio 1.10
 
-solución 1.10: `awk -F '|' 'function compare(i1,v1,i2,v2){return v2-v1} BEGIN{OFS="\t"}{v[$1]+=$2} END {n = asorti(v, w, "compare"); for (i = 1; i <= 10; i++) print w[i],v[w[i]]}' motus_detected_genera`
+Haz lo mismo que en 1.9, pero ordenando por abundancia de mayor a menor, para mostrar solamente los 10 géneros más abundantes en la muestra.
+
+**solución 1.10:** `awk -F '|' 'function compare(i1,v1,i2,v2){return v2-v1} BEGIN{OFS="\t"}{v[$1]+=$2} END {n = asorti(v, w, "compare"); for (i = 1; i <= 10; i++) print w[i],v[w[i]]}' motus_detected_genera`
 
 salida esperada:
 ```
@@ -209,4 +223,29 @@ Firmicutes      0.025413
 [Eubacterium]   0.0221895
 ```
 
+----
 
+## Ejercicio 1.11
+
+Ahora que sabemos cuál es el género más abundante en nuestra muestra, veamos las abundancias para especies de dicho género. Muestra el género abreviado ("Prevotella" --> "P. "), elimina las especies genéricas o inciertas ("sp.", "incertae"), y de las restantes muestra solo las que han sido detectadas en la muestra.
+
+**solución 1.11:** `awk -F '\t' '/^#/ {next} $2~/Prevotella/ && $4 > 0.0 && $2!~/incertae|sp./ {sub("Prevotella", "P.", $2); print $2,$4}' data/motus_profile`
+
+salida esperada:
+```
+P. stercorea [Prevotella stercorea CAG:629/Prevotella stercorea] 0.0000004051
+P. denticola 0.0000021284
+P. copri [Prevotella copri CAG:164/Prevotella copri] 0.0000402069
+P. bryantii 0.0000059269
+P. bivia 0.0000155376
+P. brevis 0.0000007809
+P. ihumii 0.0000014847
+```
+
+Parece que la mayoría de *Prevotellas* en la muestra son de clasificación incierta.
+
+----
+
+**¡Enhorabuena!** Has llegado al final de los ejercicios del día 1 :)
+
+----
