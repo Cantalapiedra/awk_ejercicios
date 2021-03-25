@@ -24,8 +24,7 @@ grep "^#" data/motus_profile
 
 ¿Cómo hacemos esto mismo con awk?
 
-solucion:
-awk '/^#/' data/motus_profile
+solucion: `awk '/^#/' data/motus_profile`
 
 salida esperada:
 la misma que para el grep
