@@ -25,8 +25,14 @@ Sigue los enunciados abriendo el fichero del dia correspondiente o directamente 
 
 ### Soluciones
 
-git checkout solve
+Descarga las soluciones con:
 
-O cambia a la rama "solve" en GitHub.
+```
+git checkout solve
+```
+
+Abre el documento del día correspondiente y busca las líneas que comienzan con la palabra "solución".
+
+Otra opción es ver las opciones en GitHub. Simplemente cambia a la rama "solve" y ve al día correspondiente y busca las líneas que comienzan con la palabra "solución".
 
 
