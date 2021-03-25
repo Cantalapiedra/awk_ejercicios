@@ -1,14 +1,15 @@
 # Día 1: analizando perfiles de especies en una muestra metagenómica 
 
-data/motus_profile
+Para esta práctica usaremos de partida el fichero (data/motus_profile)[data/motus_profile]
 
-Este es un fichero procedente del análisis, de una muestra de secuenciación de DNA metagenómica, con mOTUs v2.5.1 https://github.com/motu-tool/mOTUs_v2.
-Dados unos "reads", el programa los mapea contra una serie de genes marcadores, e intenta dar un perfil de especies presentes en la muestra.
+Este es un fichero procedente del análisis, de una muestra de secuenciación de DNA metagenómica, con (*mOTUs v2.5.1*)[https://github.com/motu-tool/mOTUs_v2]. Dados unos ficheros con lecturas de secuenciación de ADN (*reads*, en inglés), el programa los mapea contra una serie de genes marcadores, para calcular un perfil de especies presentes en la muestra.
 
 El fichero tiene una cabecera (filas que comienzan por "#"), y luego filas de 4 campos.
 
 
-1.1 Comencemos por ver la cabecera del fichero. Podemos hacer esto fácilmente con grep:
+## Ejercicio 1.1
+
+Comencemos por ver la cabecera del fichero. Podemos hacer esto fácilmente con grep:
 
 ```
 grep "^#" data/motus_profile
@@ -23,20 +24,22 @@ salida del grep:
 
 ¿Cómo hacemos esto mismo con awk?
 
-solución 1.1: `awk '/^#/' data/motus_profile`
+**solución 1.1:** `awk '/^#/' data/motus_profile`
 
 salida esperada:
 la misma que para el grep
 
-Deberiamos ver que el fichero tiene las columnas:
-- mOTU: un identificador para el grupo identificado.
-- consensus_taxonomy: la clasificación taxonómica consenso para dicho mOTU.
-- NCBI_tax_id: el identificador de grupo taxonómico en la base de datos NCBI Taxonomy.
-- 16s001178: este es el nombre de la muestra analizada en este experimento en concreto. La columna contendrá la abundancia relativa de este mOTU en la muestra.
+Como vemos, el fichero tiene las siguientes columnas:
+- *mOTU*: un identificador para el grupo identificado.
+- *consensus_taxonomy*: la clasificación taxonómica consenso para dicho mOTU.
+- *NCBI_tax_id*: el identificador de grupo taxonómico en la base de datos NCBI Taxonomy.
+- *16s001178*: este es el nombre de la muestra analizada en este experimento en concreto. Los valores de las filas contienen la abundancia relativa de cada mOTU en esta muestra en particular. De esta forma, podemos juntar en un solo fichero resultados de varias muestras (pero esto no lo vamos a ver aquí).
 
--------------
+----
 
-1.2. Ahora veamos los valores para la primera fila de datos. Podemos hacer esto fácilmente con:
+## Ejercicio 1.2
+
+Ahora veamos los valores para la primera fila de datos. Podemos hacer esto fácilmente con:
 
 ```
 grep -v "^#" data/motus_profile | head -1
