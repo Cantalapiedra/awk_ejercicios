@@ -17,8 +17,8 @@ grep "^#" data/motus_profile
 ```
 
 ```
-# git tag version 2.5.1 |  motus version 2.5.1 | map_tax 2.5.1 | gene database: nr2.5.1 | calc_mgc 2.5.1 -y insert.scaled_counts -l 50 | calc_motu 2.5.1 -k mOTU -C no_CAMI -g 1 -p -u | taxonomy: ref_mOTU_2.5.1 meta_mOTU_2.5.1
-# call: python /home/cantalapiedra/miniconda3/bin/../share/motus-2.5.1//motus profile -f /data/jhc/prokaryokit/capture_clean_reads/16s001178_1P.fq -r /data/jhc/prokaryokit/capture_clean_reads/16s001178_2P.fq -s /data/jhc/prokaryokit/capture_clean_reads/16s001178_1U.fq -n 16s001178 -o motus2/capture/16s001178.motus_profile -I motus2/capture/16s001178.bam -M motus2/capture/16s001178.mgc -p -u -g 1 -l 50 -t 40
+# git tag version 2.5.1 |  motus version 2.5.1
+# call: python motus profile
 #mOTU   consensus_taxonomy      NCBI_tax_id     16s001178
 ```
 
@@ -29,6 +29,8 @@ awk '/^#/' data/motus_profile
 
 salida esperada:
 la misma que para el grep
+
+-------------
 
 Deberiamos ver que el fichero tiene las columnas:
 mOTU: un identificador para el grupo identificado.
