@@ -1,8 +1,8 @@
 # Día 1: analizando perfiles de especies en una muestra metagenómica 
 
-Para esta práctica usaremos de partida el fichero (data/motus_profile)[data/motus_profile]
+Para esta práctica usaremos de partida el fichero [data/motus_profile](data/motus_profile)
 
-Este es un fichero procedente del análisis, de una muestra de secuenciación de DNA metagenómica, con (*mOTUs v2.5.1*)[https://github.com/motu-tool/mOTUs_v2]. Dados unos ficheros con lecturas de secuenciación de ADN (*reads*, en inglés), el programa los mapea contra una serie de genes marcadores, para calcular un perfil de especies presentes en la muestra.
+Este es un fichero procedente del análisis, de una muestra de secuenciación de DNA metagenómica, con [*mOTUs v2.5.1*](https://github.com/motu-tool/mOTUs_v2). Dados unos ficheros con lecturas de secuenciación de ADN (*reads*, en inglés), el programa los mapea contra una serie de genes marcadores, para calcular un perfil de especies presentes en la muestra.
 
 El fichero tiene una cabecera (filas que comienzan por "#"), y luego filas de 4 campos.
 
