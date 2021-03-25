@@ -66,7 +66,7 @@ la misma que para el grep
 grep -v "^#" data/motus_profile | head -10 | cut -f 2
 ```
 
-salida del comando:
+salida del comando que usa grep:
 ```
 Leptospira alexanderi
 Leptospira weilii [Leptospira sp. P2653/Leptospira weilii]
@@ -79,3 +79,44 @@ Chryseobacterium sp. G972
 Chryseobacterium contaminans
 Chryseobacterium indologenes
 ```
+
+¿Cómo hacemos esto mismo con awk?
+
+solución 1.3: `awk -F '\t' '/^#/ {next;} i < 10 {print $2; i++;} i >= 10 {exit}' data/motus_profile`
+
+salida esperada:
+la misma que con el comando que usa grep
+
+----
+
+1.4. Ahora vamos ya al meollo de la cuestión. En el fichero tenemos los datos para todos los mOTUs. Queremos ver cuántos tenemos en nuestra muestra, es decir, cuántos hay con abundancia relativa > 0. Esto ya no es tan fácil de hacer sin utilizar awk. En concreto, vamos a mostrar el total de mOTUs, cuántos no han sido detectados y cuántos sí han sido detectados en la muestra.
+
+¿Cómo lo hacemos con awk?
+
+solución 1.4: `awk -F '\t' '/^#/ {next} $4 == 0.0 {i++} $4 > 0.0 {j++} END {print i+j,i,j}' data/motus_profile`
+
+salida esperada:
+```
+14213 13521 692
+```
+
+
+----
+
+1.5. ¿Cómo podemos hacer para en lugar de la salida de 1.4 obtener la salida en el siguiente formato?
+
+```
+14213,13521,692
+```
+
+solución 1.5: `awk -F '\t' 'BEGIN{OFS=","} /^#/ {next} $4 == 0.0 {i++} $4 > 0.0 {j++} END {print i+j,i,j}' data/motus_profile`
+
+----
+
+1.6. ¿Y en el siguiente formato?
+
+```
+14213 = 13521 + 692
+```
+
+solución 1.6: `awk -F '\t' '/^#/ {next} $4 == 0.0 {i++} $4 > 0.0 {j++} END {printf "%s = %s + %s\n",i+j,i,j}' data/motus_profile`
