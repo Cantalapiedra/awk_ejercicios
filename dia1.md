@@ -182,7 +182,7 @@ Bacteroidaceae  7.34845e-05
 ## Ejercicio 1.9
 
 Haz lo mismo que en 1.8, pero mostrando los géneros ordenados alfabéticamente.
-tip: usa la función "asorti" https://www.gnu.org/software/gawk/manual/html_node/Array-Sorting-Functions.html
+tip: usa la función [***asorti***](https://www.gnu.org/software/gawk/manual/html_node/Array-Sorting-Functions.html)
 
 **solución 1.9:** `awk -F '|' 'BEGIN{OFS="\t"}{v[$1]+=$2} END {n = asorti(v, w); for (i = 1; i <= n; i++) print w[i],v[w[i]]}' motus_detected_genera`
 
@@ -242,7 +242,7 @@ P. brevis 0.0000007809
 P. ihumii 0.0000014847
 ```
 
-Parece que la mayoría de *Prevotellas* en la muestra son de clasificación incierta.
+Parece que la mayoría de *prevotellas* en la muestra son de clasificación incierta. O.,o
 
 ----
 
