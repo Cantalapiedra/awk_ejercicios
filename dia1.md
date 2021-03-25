@@ -24,11 +24,6 @@ salida del grep:
 
 ¿Cómo hacemos esto mismo con awk?
 
-<<<<<<< HEAD
-
-=======
-
->>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada:
 la misma que para el grep
@@ -56,11 +51,6 @@ ref_mOTU_v25_00001      Leptospira alexanderi   100053  0.0000000000
 
 ¿Cómo hacemos esto mismo con awk?
 
-<<<<<<< HEAD
-
-=======
-
->>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada:
 la misma que para el grep
@@ -91,11 +81,6 @@ Chryseobacterium indologenes
 
 ¿Cómo hacemos esto mismo con awk?
 
-<<<<<<< HEAD
-
-=======
-
->>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada:
 la misma que con el comando que usa grep
@@ -108,11 +93,6 @@ Ahora vamos ya al meollo de la cuestión. En el fichero tenemos los datos para t
 
 ¿Cómo lo hacemos con awk?
 
-<<<<<<< HEAD
-
-=======
-
->>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada:
 ```
@@ -130,12 +110,6 @@ salida esperada:
 14213,13521,692
 ```
 
-<<<<<<< HEAD
-
-=======
-
->>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
-
 ----
 
 ## Ejercicio 1.6
@@ -146,12 +120,6 @@ salida esperada:
 14213 = 13521 + 692
 ```
 
-<<<<<<< HEAD
-
-=======
-
->>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
-
 ----
 
 ## Ejercicio 1.7
@@ -160,12 +128,6 @@ Así que tenemos 692 mOTUs detectados en la muestra. Imprime solamente esos 692 
 
 - Género
 - Abundancia relativa
-
-<<<<<<< HEAD
-
-=======
-
->>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada (contenido de "motus_detected_genera"):
 ```
@@ -187,12 +149,6 @@ Streptococcus|0.0000041700
 ## Ejercicio 1.8
 
 Procesa el fichero obtenido en 1.7, para mostrar una sola línea por género, incluyendo como columnas el nombre del género y la suma de los valores de abundancia para ese género, dichos campos separados por tabulador.
-
-<<<<<<< HEAD
-
-=======
-
->>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada:
 ```
@@ -216,12 +172,6 @@ Bacteroidaceae  7.34845e-05
 Haz lo mismo que en 1.8, pero mostrando los géneros ordenados alfabéticamente.
 tip: usa la función [***asorti***](https://www.gnu.org/software/gawk/manual/html_node/Array-Sorting-Functions.html)
 
-<<<<<<< HEAD
-
-=======
-
->>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
-
 salida esperada:
 ```
 -1      0.0459829
@@ -241,13 +191,8 @@ Agrobacterium   8.397e-07
 
 ## Ejercicio 1.10
 
-<<<<<<< HEAD
-
-=======
 Haz lo mismo que en 1.9, pero ordenando por abundancia de mayor a menor, para mostrar solamente los 10 géneros más abundantes en la muestra.
 
-
->>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada:
 ```
