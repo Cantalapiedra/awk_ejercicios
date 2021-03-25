@@ -1,5 +1,7 @@
 # Ejercicios para AWK
 
+solución: **efectivamente, estás en la rama "solve", donde encontrarás las soluciones en el día correspondiente**
+
 *Ejercicios para practicar awk - por Carlos P. Cantalapiedra (202103)*
 
 ### Setup
