@@ -1,14 +1,15 @@
 # Día 1: analizando perfiles de especies en una muestra metagenómica 
 
-data/motus_profile
+Para esta práctica usaremos de partida el fichero [data/motus_profile](data/motus_profile)
 
-Este es un fichero procedente del análisis, de una muestra de secuenciación de DNA metagenómica, con mOTUs v2.5.1 https://github.com/motu-tool/mOTUs_v2.
-Dados unos "reads", el programa los mapea contra una serie de genes marcadores, e intenta dar un perfil de especies presentes en la muestra.
+Este es un fichero procedente del análisis, de una muestra de secuenciación de DNA metagenómica, con [*mOTUs v2.5.1*](https://github.com/motu-tool/mOTUs_v2). Dados unos ficheros con lecturas de secuenciación de ADN (*reads*, en inglés), el programa los mapea contra una serie de genes marcadores, para calcular un perfil de especies presentes en la muestra.
 
 El fichero tiene una cabecera (filas que comienzan por "#"), y luego filas de 4 campos.
 
 
-1.1 Comencemos por ver la cabecera del fichero. Podemos hacer esto fácilmente con grep:
+## Ejercicio 1.1
+
+Comencemos por ver la cabecera del fichero. Podemos hacer esto fácilmente con grep:
 
 ```
 grep "^#" data/motus_profile
@@ -23,20 +24,26 @@ salida del grep:
 
 ¿Cómo hacemos esto mismo con awk?
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada:
 la misma que para el grep
 
-Deberiamos ver que el fichero tiene las columnas:
-- mOTU: un identificador para el grupo identificado.
-- consensus_taxonomy: la clasificación taxonómica consenso para dicho mOTU.
-- NCBI_tax_id: el identificador de grupo taxonómico en la base de datos NCBI Taxonomy.
-- 16s001178: este es el nombre de la muestra analizada en este experimento en concreto. La columna contendrá la abundancia relativa de este mOTU en la muestra.
+Como vemos, el fichero tiene las siguientes columnas:
+- *mOTU*: un identificador para el grupo identificado.
+- *consensus_taxonomy*: la clasificación taxonómica consenso para dicho mOTU.
+- *NCBI_tax_id*: el identificador de grupo taxonómico en la base de datos NCBI Taxonomy.
+- *16s001178*: este es el nombre de la muestra analizada en este experimento en concreto. Los valores de las filas contienen la abundancia relativa de cada mOTU en esta muestra en particular. De esta forma, podemos juntar en un solo fichero resultados de varias muestras (pero esto no lo vamos a ver aquí).
 
--------------
+----
 
-1.2. Ahora veamos los valores para la primera fila de datos. Podemos hacer esto fácilmente con:
+## Ejercicio 1.2
+
+Ahora veamos los valores para la primera fila de datos. Podemos hacer esto fácilmente con:
 
 ```
 grep -v "^#" data/motus_profile | head -1
@@ -49,14 +56,20 @@ ref_mOTU_v25_00001      Leptospira alexanderi   100053  0.0000000000
 
 ¿Cómo hacemos esto mismo con awk?
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada:
 la misma que para el grep
 
 ----
 
-1.3. Veamos a continuación algunos valores de la columna "consensus_taxonomy", que es la segunda columna. Por ejemplo, vamos a mostrar los primeros 10 valores de dicha columna.
+## Ejercicio 1.3
+
+Veamos a continuación algunos valores de la columna *consensus_taxonomy*, que es la segunda columna. Por ejemplo, vamos a mostrar los primeros 10 valores de dicha columna.
 
 ```
 grep -v "^#" data/motus_profile | head -10 | cut -f 2
@@ -78,18 +91,28 @@ Chryseobacterium indologenes
 
 ¿Cómo hacemos esto mismo con awk?
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada:
 la misma que con el comando que usa grep
 
 ----
 
-1.4. Ahora vamos ya al meollo de la cuestión. En el fichero tenemos los datos para todos los mOTUs. Queremos ver cuántos tenemos en nuestra muestra, es decir, cuántos hay con abundancia relativa > 0. Esto ya no es tan fácil de hacer sin utilizar awk. En concreto, vamos a mostrar el total de mOTUs, cuántos no han sido detectados y cuántos sí han sido detectados en la muestra.
+## Ejercicio 1.4
+
+Ahora vamos ya al meollo de la cuestión. En el fichero tenemos los datos para todos los mOTUs. Queremos ver cuántos tenemos en nuestra muestra, es decir, cuántos hay con abundancia relativa > 0. Esto ya no es tan fácil de hacer sin utilizar awk. En concreto, vamos a mostrar el total de mOTUs, cuántos no han sido detectados y cuántos sí han sido detectados en la muestra.
 
 ¿Cómo lo hacemos con awk?
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada:
 ```
@@ -99,33 +122,50 @@ salida esperada:
 
 ----
 
-1.5. ¿Cómo podemos hacer para en lugar de la salida de 1.4 obtener la salida en el siguiente formato?
+## Ejercicio 1.5
+
+¿Cómo podemos hacer para en lugar de la salida de 1.4 obtener la salida en el siguiente formato?
 
 ```
 14213,13521,692
 ```
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 ----
 
-1.6. ¿Y en el siguiente formato?
+## Ejercicio 1.6
+
+¿Y en el siguiente formato?
 
 ```
 14213 = 13521 + 692
 ```
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 ----
 
-1.7. Así que tenemos 692 mOTUs detectados en la muestra. Imprime solamente esos 692 a un nuevo fichero, pero solamente con los siguientes campos, separados por "|":
+## Ejercicio 1.7
+
+Así que tenemos 692 mOTUs detectados en la muestra. Imprime solamente esos 692 a un nuevo fichero llamado *motus_detected_genera*, pero solamente con los siguientes campos, separados por "|":
 
 - Género
-- Especie
 - Abundancia relativa
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada (contenido de "motus_detected_genera"):
 ```
@@ -144,9 +184,15 @@ Streptococcus|0.0000041700
 
 ----
 
-1.8. Procesa el fichero obtenido en 1.7, para mostrar una sola línea por género, incluyendo como columnas el nombre del género y la suma de los valores de abundancia para ese género, dichos campos separados por tabulador.
+## Ejercicio 1.8
 
+Procesa el fichero obtenido en 1.7, para mostrar una sola línea por género, incluyendo como columnas el nombre del género y la suma de los valores de abundancia para ese género, dichos campos separados por tabulador.
 
+<<<<<<< HEAD
+
+=======
+
+>>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada:
 ```
@@ -165,11 +211,16 @@ Bacteroidaceae  7.34845e-05
 
 ----
 
-1.9. Haz lo mismo que en 1.8, pero mostrando los géneros ordenados alfabéticamente.
-tip: usa la función "asorti" https://www.gnu.org/software/gawk/manual/html_node/Array-Sorting-Functions.html
+## Ejercicio 1.9
 
+Haz lo mismo que en 1.8, pero mostrando los géneros ordenados alfabéticamente.
+tip: usa la función [***asorti***](https://www.gnu.org/software/gawk/manual/html_node/Array-Sorting-Functions.html)
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada:
 ```
@@ -188,9 +239,15 @@ Agrobacterium   8.397e-07
 
 ----
 
-1.10. Haz lo mismo que en 1.9, pero ordenando por abundancia de mayor a menor, para mostrar solamente los 10 géneros más abundantes en la muestra.
+## Ejercicio 1.10
+
+<<<<<<< HEAD
+
+=======
+Haz lo mismo que en 1.9, pero ordenando por abundancia de mayor a menor, para mostrar solamente los 10 géneros más abundantes en la muestra.
 
 
+>>>>>>> 42f5ca829b9cc732c42cfca850903c54f654e22c
 
 salida esperada:
 ```
@@ -206,4 +263,29 @@ Firmicutes      0.025413
 [Eubacterium]   0.0221895
 ```
 
+----
 
+## Ejercicio 1.11
+
+Ahora que sabemos cuál es el género más abundante en nuestra muestra, veamos las abundancias para especies de dicho género. Muestra el género abreviado ("Prevotella" --> "P. "), elimina las especies genéricas o inciertas ("sp.", "incertae"), y de las restantes muestra solo las que han sido detectadas en la muestra.
+
+
+
+salida esperada:
+```
+P. stercorea [Prevotella stercorea CAG:629/Prevotella stercorea] 0.0000004051
+P. denticola 0.0000021284
+P. copri [Prevotella copri CAG:164/Prevotella copri] 0.0000402069
+P. bryantii 0.0000059269
+P. bivia 0.0000155376
+P. brevis 0.0000007809
+P. ihumii 0.0000014847
+```
+
+Parece que la mayoría de *prevotellas* en la muestra son de clasificación incierta. O.,o
+
+----
+
+**¡Enhorabuena!** Has llegado al final de los ejercicios del día 1 :)
+
+----
