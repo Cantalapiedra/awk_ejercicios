@@ -120,3 +120,94 @@ solución 1.5: `awk -F '\t' 'BEGIN{OFS=","} /^#/ {next} $4 == 0.0 {i++} $4 > 0.0
 ```
 
 solución 1.6: `awk -F '\t' '/^#/ {next} $4 == 0.0 {i++} $4 > 0.0 {j++} END {printf "%s = %s + %s\n",i+j,i,j}' data/motus_profile`
+
+----
+
+1.7. Así que tenemos 692 mOTUs detectados en la muestra. Imprime solamente esos 692 a un nuevo fichero, pero solamente con los siguientes campos, separados por "|":
+
+- Género
+- Especie
+- Abundancia relativa
+
+solución 1.7: `awk -F '\t' 'BEGIN{OFS="|"} /^#/ {next} $4 > 0.0 {sub(" .*", "", $2); print $2,$4 > "motus_detected_genera"}' data/motus_profile`
+
+salida esperada (contenido de "motus_detected_genera"):
+```
+Vibrio|0.0000298200
+Vibrio|0.0000058563
+Proteobacteria|0.0000010894
+Enterobacteriaceae|0.0000007736
+Pseudomonas|0.0000005643
+Streptococcus|0.0000240375
+Streptococcus|0.0000393340
+Streptococcus|0.0000117978
+Streptococcus|0.0000065401
+Streptococcus|0.0000041700
+...
+```
+
+----
+
+1.8. Procesa el fichero obtenido en 1.7, para mostrar una sola línea por género, incluyendo como columnas el nombre del género y la suma de los valores de abundancia para ese género, dichos campos separados por tabulador.
+
+solución 1.8: `awk -F '|' 'BEGIN{OFS="\t"}{v[$1]+=$2} END {for (a in v) print a,v[a]}' motus_detected_genera`
+
+salida esperada:
+```
+uncultured      0.000332116
+Lactococcus     8.90441e-05
+Pseudonocardia  2.3255e-06
+Insolitispirillum       2.0513e-06
+Aggregatibacter 7.711e-07
+Chitinimonas    7.793e-07
+Bradyrhizobium  7.679e-07
+Romboutsia      1.60966e-05
+Niameybacter    1.2874e-06
+Bacteroidaceae  7.34845e-05
+...
+```
+
+----
+
+1.9. Haz lo mismo que en 1.8, pero mostrando los géneros ordenados alfabéticamente.
+tip: usa la función "asorti" https://www.gnu.org/software/gawk/manual/html_node/Array-Sorting-Functions.html
+
+
+solución 1.9: `awk -F '|' 'BEGIN{OFS="\t"}{v[$1]+=$2} END {n = asorti(v, w); for (i = 1; i <= n; i++) print w[i],v[w[i]]}' motus_detected_genera`
+
+salida esperada:
+```
+-1      0.0459829
+Abiotrophia     1.30726e-05
+Acidaminococcus 1.7287e-06
+Acinetobacter   3.7644e-06
+Actinobacteria  9.18046e-05
+Actinomyces     0.000216577
+Actinomycetaceae        3.2574e-06
+Adlercreutzia   0.000154643
+Aggregatibacter 7.711e-07
+Agrobacterium   8.397e-07
+...
+```
+
+----
+
+1.10. Haz lo mismo que en 1.9, pero ordenando por abundancia de mayor a menor, para mostrar solamente los 10 géneros más abundantes en la muestra.
+
+solución 1.10: `awk -F '|' 'function compare(i1,v1,i2,v2){return v2-v1} BEGIN{OFS="\t"}{v[$1]+=$2} END {n = asorti(v, w, "compare"); for (i = 1; i <= 10; i++) print w[i],v[w[i]]}' motus_detected_genera`
+
+salida esperada:
+```
+Prevotella      0.2752
+Faecalibacterium        0.212773
+Bacteroides     0.0831857
+Ruminococcus    0.069154
+Clostridiales   0.0582455
+Ruminococcaceae 0.0462725
+-1      0.0459829
+Bifidobacterium 0.0347672
+Firmicutes      0.025413
+[Eubacterium]   0.0221895
+```
+
+
