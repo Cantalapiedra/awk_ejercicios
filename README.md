@@ -30,14 +30,13 @@ awk '/^#/' data/motus_profile
 salida esperada:
 la misma que para el grep
 
--------------
-
 Deberiamos ver que el fichero tiene las columnas:
-mOTU: un identificador para el grupo identificado.
-consensus_taxonomy: la clasificación taxonómica consenso para dicho mOTU.
-NCBI_tax_id: el identificador de grupo taxonómico en la base de datos NCBI Taxonomy.
-16s001178: este es el nombre de la muestra analizada en este experimento en concreto. La columna contendrá la abundancia relativa de este mOTU en la muestra.
+- mOTU: un identificador para el grupo identificado.
+- consensus_taxonomy: la clasificación taxonómica consenso para dicho mOTU.
+- NCBI_tax_id: el identificador de grupo taxonómico en la base de datos NCBI Taxonomy.
+- 16s001178: este es el nombre de la muestra analizada en este experimento en concreto. La columna contendrá la abundancia relativa de este mOTU en la muestra.
 
+-------------
 
 Ahora veamos los valores para la primera fila de datos. Podemos hacer esto fácilmente con:
 
